@@ -7,7 +7,6 @@ namespace Option {
         public static readonly int NoneHashcode = new object().GetHashCode();
     }
 
-
     public class Option<T> : IEnumerable<T> {
         public static readonly Option<T> None = new NoneImpl();
 
@@ -40,6 +39,9 @@ namespace Option {
             _value = value;
         }
 
+        public T Value { get { return Get(); } }
+        public virtual bool IsDefined { get { return true; } }
+
         public Option<T> OrElse(Option<T> other) {
             return IsDefined ? this : other;
         }
@@ -48,13 +50,11 @@ namespace Option {
             return _value;
         }
 
-        public T Value { get { return Get(); } }
 
         public T GetOrElse(T defaultValue) {
             return IsDefined ? _value : defaultValue;
         }
 
-        public virtual bool IsDefined { get { return true; } }
 
         public virtual IEnumerator<T> GetEnumerator() {
             yield return _value;
