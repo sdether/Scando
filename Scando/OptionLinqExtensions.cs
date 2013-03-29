@@ -1,6 +1,6 @@
 using System;
 
-namespace Option {
+namespace Scando {
     public static class LinqExtensions {
 
         public static Option<V> Select<T, V>(this Option<T> option, Func<T, Option<V>> selector) {

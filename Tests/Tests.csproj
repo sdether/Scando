@@ -48,9 +48,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Option\Option.csproj">
+    <ProjectReference Include="..\Scando\Scando.csproj">
       <Project>{4B9BB040-CE8A-4C14-93C7-47627F2BFA65}</Project>
-      <Name>Option</Name>
+      <Name>Scando</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

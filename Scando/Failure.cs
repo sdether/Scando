@@ -1,6 +1,6 @@
 using System;
 
-namespace Option {
+namespace Scando {
     public class Failure<T> : Try<T> {
         private readonly Exception _exception;
 

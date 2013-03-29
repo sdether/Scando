@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Option", "Option\Option.csproj", "{4B9BB040-CE8A-4C14-93C7-47627F2BFA65}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{EEEDCC7C-63D7-43EC-9BC7-64B073720196}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scando", "Scando\Scando.csproj", "{4B9BB040-CE8A-4C14-93C7-47627F2BFA65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,14 +11,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4B9BB040-CE8A-4C14-93C7-47627F2BFA65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4B9BB040-CE8A-4C14-93C7-47627F2BFA65}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4B9BB040-CE8A-4C14-93C7-47627F2BFA65}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4B9BB040-CE8A-4C14-93C7-47627F2BFA65}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EEEDCC7C-63D7-43EC-9BC7-64B073720196}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EEEDCC7C-63D7-43EC-9BC7-64B073720196}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEEDCC7C-63D7-43EC-9BC7-64B073720196}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEEDCC7C-63D7-43EC-9BC7-64B073720196}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B9BB040-CE8A-4C14-93C7-47627F2BFA65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B9BB040-CE8A-4C14-93C7-47627F2BFA65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B9BB040-CE8A-4C14-93C7-47627F2BFA65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B9BB040-CE8A-4C14-93C7-47627F2BFA65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

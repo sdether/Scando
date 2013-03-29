@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Option {
+namespace Scando {
     public class Success<T> : Try<T> {
         private readonly T _value;
 

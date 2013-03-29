@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Option {
+namespace Scando {
 
     public class Try<T> : IEnumerable<T> {
         public static Try<T> Eval(Func<T> closure) {

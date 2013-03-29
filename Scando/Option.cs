@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Option {
+namespace Scando {
     internal static class NoneBase {
         public static readonly int NoneHashcode = new object().GetHashCode();
     }

@@ -1,8 +1,8 @@
 ﻿using System;
 using NUnit.Framework;
-using Option;
+using Scando;
 
-namespace Tests {
+namespace ScandoTests {
 
     [TestFixture]
     public class OptionTests {
