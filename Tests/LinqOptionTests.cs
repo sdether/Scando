@@ -1,3 +1,25 @@
+/*-----------------------------------------------------------------------------
+ * Copyright (c) 2013 Arne F. Claassen.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+ * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *---------------------------------------------------------------------------*/
 using System.Linq;
 using NUnit.Framework;
 using Scando;
@@ -40,6 +62,20 @@ namespace ScandoTests {
         [Test]
         public void Can_use_FirstOrDefault_to_get_value_of_Option() {
             Assert.AreEqual(42, Option<int>.Some(42).FirstOrDefault());
+        }
+
+        [Test]
+        public void Can_convert_IEnumerable_with_values_to_Option() {
+            var enumerable = new[] { 123 };
+            var o = enumerable.ToOption();
+            Assert.AreEqual(123, o.Value);
+        }
+
+        [Test]
+        public void Can_convert_empty_IEnumerable_to_Option() {
+            var enumerable = new int[0];
+            var o = enumerable.ToOption();
+            Assert.AreEqual(Option<int>.None, o);
         }
 
         [Test]
@@ -97,6 +133,21 @@ namespace ScandoTests {
                      from c in chain.Double(b)
                      select c).ToList();
             Assert.IsFalse(r.Any());
+        }
+
+        [Test]
+        public void Can_convert_linq_result_to_Option() {
+            var chain = new Chainable();
+            var o = (from a in chain.DoSomething() select a).ToOption();
+            Assert.IsTrue(o.IsDefined);
+            Assert.AreEqual("foo", o.Value);
+        }
+
+        [Test]
+        public void Can_convert_empty_linq_result_to_Option() {
+            var chain = new Chainable();
+            var o = (from a in chain.DoNothing() select a).ToOption();
+            Assert.AreEqual(Option<string>.None, o);
         }
 
         private class Chainable {

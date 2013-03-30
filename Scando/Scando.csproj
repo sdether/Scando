@@ -8,8 +8,8 @@
     <ProjectGuid>{4B9BB040-CE8A-4C14-93C7-47627F2BFA65}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Option</RootNamespace>
-    <AssemblyName>Option</AssemblyName>
+    <RootNamespace>Scando</RootNamespace>
+    <AssemblyName>Scando</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
