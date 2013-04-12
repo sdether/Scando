@@ -62,8 +62,6 @@ namespace Scando {
             yield break;
         }
 
-        public abstract Try<T> Where(Pr) 
-
         public virtual Option<T> ToOption() {
             return Option<T>.None;
         }

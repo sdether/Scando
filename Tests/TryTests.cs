@@ -185,7 +185,5 @@ namespace ScandoTests {
             Assert.IsFalse(o.IsDefined);
             Assert.AreSame(Option<string>.None, o);
         }
-
-
     }
 }

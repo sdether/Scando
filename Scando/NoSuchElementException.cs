@@ -21,18 +21,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *---------------------------------------------------------------------------*/
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Scando {
-    public static class LinqExtensions {
-
-        public static Option<V> Select<T, V>(this Option<T> option, Func<T, Option<V>> selector) {
-            return option.IsDefined ? selector(option.Value) : Option<V>.None;
-        }
-
-        public static Option<T> ToOption<T>(this IEnumerable<T> enumerable) {
-            return enumerable.Any() ? Option<T>.Some(enumerable.First()) : Option<T>.None;
-        }
-    }
+    public class NoSuchElementException : Exception { }
 }

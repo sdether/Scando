@@ -25,14 +25,22 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Scando {
-    public static class LinqExtensions {
+    public static class TryLinqExtensions {
 
-        public static Option<V> Select<T, V>(this Option<T> option, Func<T, Option<V>> selector) {
-            return option.IsDefined ? selector(option.Value) : Option<V>.None;
+        public static Try<V> Select<T, V>(this Try<T> option, Func<T, Try<V>> selector) {
+            return option.IsSuccess ? selector(option.Value) : new Failure<V>(option.Exception);
         }
 
-        public static Option<T> ToOption<T>(this IEnumerable<T> enumerable) {
-            return enumerable.Any() ? Option<T>.Some(enumerable.First()) : Option<T>.None;
+        public static Try<T> Where<T>(this Try<T> source, Func<T, bool> predicate) {
+            if(source.IsFailure) {
+                return source;
+            }
+            return predicate(source.Value) ? source : new Failure<T>(new NoSuchElementException());
         }
+
+        public static Try<T> ToTry<T>(this IEnumerable<T> enumerable) {
+            return enumerable.Any() ? (Try<T>)new Success<T>(enumerable.First()) : new Failure<T>(new NoSuchElementException());
+        }
+
     }
 }
