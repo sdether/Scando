@@ -28,10 +28,7 @@ namespace Scando {
     public static class LinqExtensions {
 
         public static Option<V> Select<T, V>(this Option<T> option, Func<T, Option<V>> selector) {
-            if(option.IsDefined) {
-                return selector(option.Value);
-            }
-            return Option<V>.None;
+            return option.IsDefined ? selector(option.Value) : Option<V>.None;
         }
 
         public static Option<T> ToOption<T>(this IEnumerable<T> enumerable) {
@@ -39,9 +36,16 @@ namespace Scando {
         }
 
         public static Try<V> Select<T, V>(this Try<T> option, Func<T, Try<V>> selector) {
-            return option.IsSuccess 
-                ? selector(option.Value) 
-                : new Failure<V>(option.Exception);
+            return option.IsSuccess ? selector(option.Value) : new Failure<V>(option.Exception);
+        }
+
+        public static Try<T> Where<T>(this Try<T> source, Func<T, bool> predicate) {
+            if(source.IsFailure) {
+                return source;
+            }
+            return predicate(source.Value) ? source : new Failure<T>(new NoSuchElementException());
         }
     }
+
+    public class NoSuchElementException : Exception {}
 }

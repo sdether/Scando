@@ -74,7 +74,6 @@ namespace Scando {
             return IsDefined ? _value : defaultValue;
         }
 
-
         public virtual IEnumerator<T> GetEnumerator() {
             yield return _value;
         }

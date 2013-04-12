@@ -26,7 +26,7 @@ using System.Collections.Generic;
 
 namespace Scando {
 
-    public class Try<T> : IEnumerable<T> {
+    public abstract class Try<T> : IEnumerable<T> {
         public static Try<T> Eval(Func<T> closure) {
             try {
                 return new Success<T>(closure());
@@ -34,8 +34,6 @@ namespace Scando {
                 return new Failure<T>(e);
             }
         }
-
-        protected Try() { }
 
         public virtual T Value { get { return Get(); } }
         public virtual Exception Exception { get { throw new InvalidOperationException("Try did not succeed"); } }
@@ -54,21 +52,17 @@ namespace Scando {
             return defaultValue;
         }
 
-        public virtual Try<T> Recover(Func<Exception,T> recoverClosure) {
-            throw new NotImplementedException();
-        }
+        public abstract Try<T> Recover(Func<Exception, T> recoverClosure);
 
-        public virtual Try<T> RecoverWith(Func<Exception, Try<T>> recoverClosure) {
-            throw new NotImplementedException();
-        }
+        public abstract Try<T> RecoverWith(Func<Exception, Try<T>> recoverClosure);
 
-        public virtual Try<V> Transform<V>(Func<T, Try<V>> success, Func<Exception, Try<V>> failure) {
-            throw new NotImplementedException();
-        }
+        public abstract Try<V> Transform<V>(Func<T, Try<V>> success, Func<Exception, Try<V>> failure);
 
         public virtual IEnumerator<T> GetEnumerator() {
             yield break;
         }
+
+        public abstract Try<T> Where(Pr) 
 
         public virtual Option<T> ToOption() {
             return Option<T>.None;
