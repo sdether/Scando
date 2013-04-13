@@ -69,7 +69,6 @@ namespace Scando {
             return _value;
         }
 
-
         public T GetOrElse(T defaultValue) {
             return IsDefined ? _value : defaultValue;
         }

@@ -43,8 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LinqOptionTests.cs" />
-    <Compile Include="LinqTryTests.cs" />
+    <Compile Include="ForComprehensionTests.cs" />
+    <Compile Include="OptionLinqTests.cs" />
+    <Compile Include="TryLinqTests.cs" />
     <Compile Include="OptionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TryTests.cs" />

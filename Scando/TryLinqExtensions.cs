@@ -27,15 +27,43 @@ using System.Linq;
 namespace Scando {
     public static class TryLinqExtensions {
 
-        public static Try<V> Select<T, V>(this Try<T> option, Func<T, Try<V>> selector) {
-            return option.IsSuccess ? selector(option.Value) : new Failure<V>(option.Exception);
+        public static Try<T> Where<T>(this Try<T> trial, Func<T, bool> predicate) {
+            if(trial.IsFailure) {
+                return trial;
+            }
+            return predicate(trial.Value) ? trial : new Failure<T>(new NoSuchElementException());
         }
 
-        public static Try<T> Where<T>(this Try<T> source, Func<T, bool> predicate) {
-            if(source.IsFailure) {
-                return source;
+        public static Try<V> Select<T, V>(this Try<T> trial, Func<T, V> selector) {
+            return trial.IsSuccess ? (Try<V>)new Success<V>(selector(trial.Value)) : new Failure<V>(trial.Exception);
+        }
+
+        public static Try<TResult> SelectMany<T, TResult>(this Try<T> trial, Func<T, Try<TResult>> selector) {
+            return SelectMany(trial, selector, (x, y) => y);
+        }
+
+        public static Try<TResult> SelectMany<T, TCollection, TResult>(this Try<T> trial, Func<T, Try<TCollection>> collectionSelector, Func<T, TCollection, TResult> resultSelector) {
+            if(trial.IsFailure) {
+                return new Failure<TResult>(trial.Exception);
             }
-            return predicate(source.Value) ? source : new Failure<T>(new NoSuchElementException());
+            var c = collectionSelector(trial.Value);
+            if(c.IsFailure) {
+                return new Failure<TResult>(c.Exception);
+            }
+            var r = resultSelector(trial.Value, c.Value);
+            return new Success<TResult>(r);
+        }
+
+        public static Option<TResult> SelectMany<T, TCollection, TResult>(this Try<T> trial, Func<T, Option<TCollection>> collectionSelector, Func<T, TCollection, TResult> resultSelector) {
+            if(trial.IsFailure) {
+                return Option<TResult>.None;
+            }
+            var c = collectionSelector(trial.Value);
+            if(!c.IsDefined) {
+                return Option<TResult>.None;
+            }
+            var r = resultSelector(trial.Value, c.Value);
+            return Option<TResult>.Some(r);
         }
 
         public static Try<T> ToTry<T>(this IEnumerable<T> enumerable) {

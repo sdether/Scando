@@ -25,10 +25,33 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Scando {
-    public static class LinqExtensions {
+    public static class OptionLinqExtensions {
 
-        public static Option<V> Select<T, V>(this Option<T> option, Func<T, Option<V>> selector) {
-            return option.IsDefined ? selector(option.Value) : Option<V>.None;
+        public static Option<T> Where<T>(this Option<T> option, Func<T, bool> predicate) {
+            if(!option.IsDefined) {
+                return option;
+            }
+            return predicate(option.Value) ? option : Option<T>.None;
+        }
+
+        public static Option<TResult> Select<TSource,TResult>(this Option<TSource> option, Func<TSource, TResult> selector) {
+            return option.IsDefined ? Option<TResult>.Some(selector(option.Value)) : Option<TResult>.None;
+        }
+
+        public static Option<TResult> SelectMany<TSource,TResult>(this Option<TSource> option, Func<TSource, Option<TResult>> selector) {
+            return SelectMany(option, selector, (x, y) => y);
+        }
+
+        public static Option<TResult> SelectMany<TSource, TCollection, TResult>(this Option<TSource> option, Func<TSource, Option<TCollection>> collectionSelector, Func<TSource, TCollection, TResult> resultSelector) {
+            if(!option.IsDefined) {
+                return Option<TResult>.None;
+            }
+            var c = collectionSelector(option.Value);
+            if(!c.IsDefined) {
+                return Option<TResult>.None;
+            }
+            var r = resultSelector(option.Value, c.Value);
+            return Option<TResult>.Some(r);
         }
 
         public static Option<T> ToOption<T>(this IEnumerable<T> enumerable) {
