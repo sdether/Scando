@@ -21,19 +21,13 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *---------------------------------------------------------------------------*/
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace Scando {
-    public class Option<T> : IEnumerable<T> {
+    public class Option<T> {
 
         public static readonly Option<T> None = new NoneImpl();
 
         private class NoneImpl : Option<T> {
-
-            public override IEnumerator<T> GetEnumerator() {
-                yield break;
-            }
 
             public override T Get() {
                 throw new InvalidOperationException("None does not have a value");
@@ -71,14 +65,6 @@ namespace Scando {
 
         public T GetOrElse(T defaultValue) {
             return IsDefined ? _value : defaultValue;
-        }
-
-        public virtual IEnumerator<T> GetEnumerator() {
-            yield return _value;
-        }
-
-        IEnumerator IEnumerable.GetEnumerator() {
-            return GetEnumerator();
         }
 
         public override bool Equals(object other) {

@@ -22,7 +22,6 @@
  *---------------------------------------------------------------------------*/
 
 using System;
-using System.Linq;
 using NUnit.Framework;
 using Scando;
 
@@ -83,18 +82,6 @@ namespace ScandoTests {
             var where = (from x in success where x > 10 select x);
             Assert.IsTrue(where.IsSuccess);
             Assert.AreEqual(42, where.Value);
-        }
-
-        [Test]
-        public void Any_on_Failure_returns_false() {
-            var fail = new Failure<int>(new TestException());
-            Assert.IsFalse(fail.Any());
-        }
-
-        [Test]
-        public void Any_on_Success_returns_true() {
-            var success = new Success<int>(42);
-            Assert.IsTrue(success.Any());
         }
 
         [Test]

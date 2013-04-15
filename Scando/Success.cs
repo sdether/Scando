@@ -58,9 +58,5 @@ namespace Scando {
         public override Option<T> ToOption() {
             return Option<T>.Some(_value);
         }
-
-        public override IEnumerator<T> GetEnumerator() {
-            yield return _value;
-        }
     }
 }

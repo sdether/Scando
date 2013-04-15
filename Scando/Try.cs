@@ -21,12 +21,10 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *---------------------------------------------------------------------------*/
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace Scando {
 
-    public abstract class Try<T> : IEnumerable<T> {
+    public abstract class Try<T> {
         public static Try<T> Eval(Func<T> closure) {
             try {
                 return new Success<T>(closure());
@@ -58,16 +56,8 @@ namespace Scando {
 
         public abstract Try<V> Transform<V>(Func<T, Try<V>> success, Func<Exception, Try<V>> failure);
 
-        public virtual IEnumerator<T> GetEnumerator() {
-            yield break;
-        }
-
         public virtual Option<T> ToOption() {
             return Option<T>.None;
-        }
-
-        IEnumerator IEnumerable.GetEnumerator() {
-            return GetEnumerator();
         }
     }
 }

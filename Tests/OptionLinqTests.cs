@@ -43,38 +43,6 @@ namespace ScandoTests {
         }
 
         [Test]
-        public void None_is_an_empty_enumerable() {
-            var none = Option<string>.None.ToArray();
-            Assert.AreEqual(new string[0], none);
-        }
-
-        [Test]
-        public void Option_with_value_is_a_single_element_array() {
-            var some = Option<string>.Some("foo").ToArray();
-            Assert.AreEqual(new[] { "foo" }, some);
-        }
-
-        [Test]
-        public void Can_use_Any_to_test_for_Option_none() {
-            Assert.IsFalse(Option<int>.None.Any());
-        }
-
-        [Test]
-        public void Can_use_Any_to_test_for_Option_value() {
-            Assert.IsTrue(Option<int>.Some(42).Any());
-        }
-
-        [Test]
-        public void Can_use_FirstOrDefault_to_provide_default_for_None() {
-            Assert.AreEqual(0, Option<int>.None.FirstOrDefault());
-        }
-
-        [Test]
-        public void Can_use_FirstOrDefault_to_get_value_of_Option() {
-            Assert.AreEqual(42, Option<int>.Some(42).FirstOrDefault());
-        }
-
-        [Test]
         public void Can_convert_IEnumerable_with_values_to_Option() {
             var enumerable = new[] { 123 };
             var o = enumerable.ToOption();
@@ -143,19 +111,19 @@ namespace ScandoTests {
                     from c in Api.Double(b)
                     select c;
             Assert.IsTrue(r.IsDefined);
-            Assert.AreEqual(84,r.Value);
+            Assert.AreEqual(84, r.Value);
         }
 
         [Test]
         public void Can_convert_linq_result_to_Option() {
-            var o = (from a in Api.DoSomething() select a + "bar").ToOption();
+            var o = (from a in new[] { "foo" } select a + "bar").ToOption();
             Assert.IsTrue(o.IsDefined);
             Assert.AreEqual("foobar", o.Value);
         }
 
         [Test]
         public void Can_convert_empty_linq_result_to_Option() {
-            var o = (from a in Api.DoNothing() select a + "var").ToOption();
+            var o = (from a in new string[0] select a + "var").ToOption();
             Assert.AreEqual(Option<string>.None, o);
         }
 
