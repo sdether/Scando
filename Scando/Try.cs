@@ -25,7 +25,7 @@ using System;
 namespace Scando {
 
     public abstract class Try<T> {
-        public static Try<T> Eval(Func<T> closure) {
+        public static Try<T> Exec(Func<T> closure) {
             try {
                 return new Success<T>(closure());
             } catch(Exception e) {

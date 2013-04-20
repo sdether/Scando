@@ -31,7 +31,7 @@ namespace ScandoTests {
 
         [Test]
         public void Can_create_Success_via_Try_Eval() {
-            var t = Try<string>.Eval(() => "foo");
+            var t = Try<string>.Exec(() => "foo");
             Assert.IsTrue(t.IsSuccess);
             Assert.IsFalse(t.IsFailure);
             Assert.AreEqual("foo", t.Value);
@@ -47,7 +47,7 @@ namespace ScandoTests {
 
         [Test]
         public void Can_create_Failure_via_Try_Eval() {
-            var t = Try<string>.Eval(() => { throw new Exception("fail"); });
+            var t = Try<string>.Exec(() => { throw new Exception("fail"); });
             Assert.IsFalse(t.IsSuccess);
             Assert.IsTrue(t.IsFailure);
             Assert.AreEqual("fail", t.Exception.Message);

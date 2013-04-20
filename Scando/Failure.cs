@@ -33,7 +33,7 @@ namespace Scando {
         public override Exception Exception { get { return _exception; } }
 
         public override Try<T> Recover(Func<Exception, T> recoverClosure) {
-            return Eval(() => recoverClosure(_exception));
+            return Exec(() => recoverClosure(_exception));
         }
 
         public override Try<T> RecoverWith(Func<Exception, Try<T>> recoverClosure) {
