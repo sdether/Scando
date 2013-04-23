@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="ForComprehensionTests.cs" />
     <Compile Include="OptionLinqTests.cs" />
+    <Compile Include="ReaderTests.cs" />
     <Compile Include="TryLinqTests.cs" />
     <Compile Include="OptionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

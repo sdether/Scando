@@ -23,7 +23,6 @@
 using System;
 
 namespace Scando {
-
     public abstract class Try<T> {
         public static Try<T> Exec(Func<T> closure) {
             try {

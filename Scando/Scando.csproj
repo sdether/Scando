@@ -45,6 +45,7 @@
     <Compile Include="Option.cs" />
     <Compile Include="OptionLinqExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reader.cs" />
     <Compile Include="Success.cs" />
     <Compile Include="Try.cs" />
     <Compile Include="TryLinqExtensions.cs" />
